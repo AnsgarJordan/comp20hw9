@@ -1,0 +1,137 @@
+<!-- JSON HW 
+   - By: Ansgar Jordan
+   - Date: 3/23/2020
+   - Purpose: JSON Set list for Cover Band
+   -->
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+  </head>
+  <style>
+  	body {
+  		text-align: center;
+  		font-size:x-large;
+  		color:black;
+  		background-color:lightgray;
+  	}
+  	table{
+  		margin-left:auto;
+  		margin-right:auto;
+  		color:green;
+  		border: 2px groove yellow;
+  	}
+  	th, td{
+  		padding: 10px;
+  		text-align: left;
+  	}
+  	select{
+  		font-size:x-large;
+  		font-color:black;
+  		color:green;
+  	}
+  	button{
+  		font-size:x-large;
+  		color:black;
+  	}
+
+  </style>
+  <body>
+  	Serialized Data:
+  	<p id="serialized" style="color:black;font-size:small"></p>
+    Styled Data:
+  	<p id="styled"></p>
+
+
+  	<p> Sort by Genre: 
+
+  		<form>
+  			<select id="genres" name="genre">
+  				<option value="rock">Rock</option>
+  				<option value="country">Country</option>
+  				<option value="classical">Classical</option>
+  			</select>
+  			<button type="button" onclick="filter_by_type()">Submit</button>
+  		</form>
+  	</p>
+  	<p id="sorted"></p>
+  	<script language="javascript">
+
+  		var songs = {"songs": [
+  		{"artist":"The Rolling Stones","title":"Gimme' Shelter",
+  		 "genre":"rock","year":1969},
+  		 {"artist":"The Beatles","title":"Penny Lane",
+  		 "genre":"rock","year":1967},
+  		 {"artist":"Dire Straits","title":"Sultans of Swing",
+  		 "genre":"rock","year":1978},
+  		{"artist":"Toto","title":"Hold the Line",
+  		 "genre":"rock","year":1978},
+  		{"artist":"Johann Sebastian Bach",
+         "title":"Brandenburger Concerto no. 3 in G Major",
+         "genre":"classical","year":1721},
+  		{"artist":"Wolfgang Amadeus Mozart",
+  		 "title":"Requiem in D-Minor","genre":"classical","year":1791},
+  		{"artist":"Ludwig van Beethoven","title":"Pastoral Symphony",
+  		 "genre":"classical","year":1808},
+  		{"artist":"John Denver","title":"Take Me Home, Country Roads",
+  		 "genre":"country","year":1971},
+  		{"artist":"Zac Brown Band","title":"Jump Right In",
+  		 "genre":"country","year":2012},
+  		{"artist":"Jason Aldean","title":"Rearview Town",
+  		 "genre":"country","year":2018},
+  		 {"artist":"AC/DC","title":"Thunderstruck",
+  		 "genre":"rock","year":1990},
+  		 {"artist":"Carl Philip Emmanuel Bach", "title":"Sonata in A Major", 
+  		  "genre":"classical", "year":1762}
+
+  		 ]
+  		};
+  		var songstring = JSON.stringify(songs);
+  		document.getElementById("serialized").innerHTML = songstring;
+
+  		var text = "<table> ";
+  		    text += "<tr style='color:black; font-size: x-large; background-color:orange'> ";
+  		    text += "<th> Artist </th> ";
+  		    text += "<th> Title </th> ";
+  		    text += "<th> Genre </th> ";
+  		    text += "<th> Year </th> ";
+  		    text += "</tr> ";
+
+  		for (let i = 0; i < songs.songs.length; i++) {
+  			text += "<tr> "; 
+  			text += "<th> " + songs.songs[i].artist + "</th> ";
+  		    text += "<th> " + songs.songs[i].title + "</th> ";
+  		    text += "<th> " + songs.songs[i].genre + "</th> ";
+  		    text += "<th> " + songs.songs[i].year + "</th> ";
+  			text += "</tr> "; 
+  		}
+  		text += "</table>";
+  		document.getElementById("styled").innerHTML = text;
+
+  		/* Function filter_by_type
+  		 * Parameters: none
+  		 * Operations: prints out the songs with a certain genre
+  		 * returns: nothing
+  		 */
+  		function filter_by_type() 
+  		{
+  			var type = document.getElementById('genres').value;
+  			var filt = "<table> ";
+  		   	    filt += "<tr style='color:black; font-size: x-large; background-color:orange'> ";
+  		   	    filt += "<th>" + type + " songs: " + "</th> ";
+  		   	    filt += "</tr> ";
+  		for (let i = 0; i < songs.songs.length; i++) {
+
+  			if (songs.songs[i].genre == type){
+  			filt += "<tr> "; 
+  		    filt += "<th> " + songs.songs[i].title + "</th> ";
+  			filt += "</tr> "; 
+  			}
+  		}
+  			filt += "</table>";
+  			document.getElementById("sorted").innerHTML = filt;
+
+  		}
+  	</script>
+  </body>
+  </html>
